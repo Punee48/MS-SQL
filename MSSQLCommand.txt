@@ -1,0 +1,146 @@
+_______________Syntax for Creating Database_______________
+
+Create Database Employee; 
+
+_______________Syntax for Using spectific Database_______________
+
+-> Use DatabaseName; 
+
+_________________SYNTAX to Create a Table_______________
+
+-> Create Table employee (
+ID int,
+EmpName varchar(50),
+City varchar(25),
+Salary int
+);
+
+_________________SYNTAX TO INSERT RECORDS IN THE TABLE _______________
+
+insert into tablename (Column Name) values (Insert the record);
+insert into Employee (ID, Name, Salary) values ('1','Puneeth', '7000');
+
+
+________________SYNTAX TO VIEW THE RECORD IN THE TABLE_________________
+
+Select * from TableName;
+
+Select Column Name from Table Name -> Ex: Select ID, Name from Employee;
+
+
+____________________SELECT DISTINCT RECORD:_______________________
+
+Distinct value will not be repeated.
+
+Select distinct Column Name from TableName;
+
+
+_______________________WHERE STATEMENT_______________________
+
+Select Column Name from TableName where Condition 
+
+-> EX: Select Name from Employee where Salary = 8000;
+
+-> Ex02: Select Name from Employee where Name = 'Puneeth';
+
+-> Ex03: Select Name from Employee where Salary >= 7000;
+
+
+_______________________ORDER BY KEYWORD_______________________
+
+Used to display the data in Ascending or Descending Order
+
+Default: Ascending (Smallest to Largest) and Descending (Largest to Smallest)
+
+Select Column Name from TableName order by Column Name;
+
+-> EX: Select Name from Employee Order by Salary;
+
+-> EX2: Select Name from Employee Order by Salary DESC;
+
+-> EX 3 : Select Name from Employee Order by Salary, City;
+
+
+_______________________AND OPERATOR_______________________
+
+Select Column Name from TableName WHERE Condition1 and Condition2;
+
+-> EX: Select Name from Employee where City = 'Bangalore' AND Salary < '7000';
+
+
+______________________OR OPERATOR_____________________
+
+Select Column Name from Table Name Where Condition 1 or Condition 2;
+
+Ex -> Select Name from Employee where Name = 'Puneeth' or City = 'ABC';
+
+Ex 02 -> Select Name from Employee where Name = 'Puneeth' or Name = 'ABC';
+
+
+______________________NOT OPERATOR_____________________
+
+
+Used to display the data when the condition is not true
+
+
+Select Column Name from Table Name Where NOT Condition ;
+
+Ex -> Select Name from Employee where not Salary = 8000;
+
+
+______________________IN AND NOT INOPERATOR_____________________
+
+
+Select * from Table Name Where Column Name IN (Enter the Values that you required);
+
+
+Ex -> Select Name from Employee where City IN ('Bangalore', 'Chennai');
+
+Ex -> Select *  from Employee where Name IN ('Punee', 'Liyana');
+
+Ex -> Select *  from Employee where Name NOT IN ('Punee', 'Liyana'); //Display the data by ignoring Punee and Liyana from the Name Column
+
+
+______________________BETWEEN AND NOT BETWEEN OPERATOR_____________________
+
+Select * from Table Name Where Column Name BETWEEN Condition1 and Condition2
+
+
+Ex -> Select *  from Employee where Salary Between 7000 AND 9000;
+
+Ex -> Select *  from Employee where Salary NOT Between 7000 AND 9000;
+
+
+______________________LIKE OPERATOR_____________________
+
+
+Used for displaying the data in a specified Pattern
+
+
+Select * from Table Name Where Column Name LIKE Condition; 
+
+Ex -> Select *  from Employee where City LIKE 'A%'
+
+Ex -> Select *  from Employee where Name LIKE  '%i'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
