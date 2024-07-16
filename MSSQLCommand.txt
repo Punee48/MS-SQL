@@ -123,18 +123,204 @@ Ex -> Select *  from Employee where City LIKE 'A%'
 
 Ex -> Select *  from Employee where Name LIKE  '%i'
 
+Ex -> Select *  from Employee where Name NOT LIKE  'E%'
 
 
+______________________MAX FUNCTION_____________________
+
+Used to find Maximum Value of the Table
+
+Select MAX(Column Name) from Table Name;
 
 
+______________________MIN FUNCTION_____________________
+
+Used to find MINIMUM Value of the Table
+
+Select MIN(Column Name) from Table Name;
+
+______________________SUM FUNCTION_____________________
+
+Used to Return total value of the Salary Column
+
+Select SUM(Column Name) from Table Name;
+
+Ex: Select SUM(Salary) from Employee Where Salary >= 7500;
+
+______________________AVG FUNCTION_____________________
+
+Used to find Average value of the Column
+
+Select AVG(Column Name) from Table Name;
+
+Ex: Select AVG(Salary) from Employee Where Salary >= 7500;
 
 
+______________________COUNT FUNCTION_____________________
+
+Used to Count the Value based on the specific Condition
+
+Select COUNT(Column Name) from Table Name;
+Select COUNT(*) from Table Name;
+
+Ex: Select COUNT(Salary) from Employee Where Salary >= 7500;
 
 
+______________________NOT NULL CONSTRAINTS_____________________
+
+We will be using this Not Null Constraint while creating a table Columns.
+
+Create Table employee (
+ID int not null UNIQUE,
+Name varchar(255) Not Null,
+Salary int
+);
+
+______________________UNIQUE CONSTRAINTS_____________________
+
+All the Value in the Column should be different.
+
+Create Table employee (
+ID int not null UNIQUE,
+Name varchar(255) Not Null,
+Salary int
+);
 
 
+______________________Primary Key CONSTRAINTS_____________________
+
+Table can have only one PK.
+
+Create Table employee (
+ID int not null PRIMARY KEY,
+Name varchar(255) Not Null,
+Salary int
+);
+
+______________________ Foreign Key CONSTRAINTS_____________________
+
+Foreign Key is a field in one table referring to the Primary key in the Another Table
+
+Create Table Department(
+DeptID int not null Primary Key,
+DeptName varchar(255) Not null, 
+EmpID int Foreign Key references Employee(EmpID)
+);
+
+______________________ Check CONSTRAINTS_____________________
+
+It helps to enter the Valid value to the Column
+
+Create Table employee (
+ID int not null PRIMARY KEY,
+Name varchar(255) Not Null,
+Salary int CHECK (Salary < 10000)
+);
+
+______________________ ASC COMMAND_____________________
+
+Used to display the Table data in a Ascending Order
+
+Ex -> Select *  from Employee Order by Salary ASC; 
+Ex -> Select *  from Employee Order by EmpName ASC; 
 
 
+______________________ DESC COMMAND_____________________
+
+Used to display the Table data in a Descending Order
+
+Ex -> Select *  from Employee Order by Salary DESC;
+
+______________________ ALTER Statement_____________________
+
+It is used for Altering the Table Name, Adding Column
+
+Alter Table TableName ADD ColumnName Datatype;
+Alter Table TableName DROP Column ColumnName;
+
+______________________ UPDATE STATEMENT _____________________
+
+Used to update the data in the Table
+
+Update tableName SET Value WHERE CONDITION;
+
+Update Employee SET Salary = '9500' where ID = 4;
+
+______________________ SQL ALIAS _____________________
+
+Used to give a Tempory Name for the Table and it will used for that query only. After exceuting the query the Alias will be deleted
+
+Select EmpName AS MyResult from Employee;
+
+
+______________________ SQL Stored Procedure_____________________
+
+It is a prepared SQL Statement that we can reuse the code whenever we require. 
+Stored Procedure is like Function.
+
+Create Procedure AllRecords
+AS
+Select * from employee
+Go; 
+
+EXEC AllRecords;
+
+--> Creating a Stored Procedure with Parameters
+
+Create Procedure AllRecords2 @City varchar(20)
+AS
+Select * from employee where City = @City
+Go; 
+
+exec AllRecords2 @City = 'ABC';
+
+--> Creating a Stored Procedure with two Parameters
+
+Create Procedure AllRecords2 @City varchar(20), @empName varchar(255)
+AS
+Select * from employee where City = @City AND EmpName = @empName
+Go; 
+
+exec AllRecords2 @City = 'ABC', @EmpName = 'Tom';
+
+
+______________________ SQL INDEX_____________________
+
+Used to retrive date from the Database
+
+Create Index IndexName on TableName (Column Name1, ColumnName2);
+
+DROP INDEX TableName.IndexName;
+
+______________________ SQL Select INTO STATEMENT_____________________
+
+Used to copy the table in a new Table 
+
+Select * into NewTableName from CurrentTableName;
+
+Select * from Into Empbackup2022 from Employee;
+
+______________________ SQL Select TOP RECORDS _____________________
+
+Used to display the top record of the table
+
+Select top 2 * from employee;
+Select top 50 percent * from employee;
+Select top 50 percent * from employee where salary >= 5000;
+
+
+______________________ SQLBackup Database _____________________
+
+backup database databaseName to disk = 'Need to paste path where the file need to be stored';
+
+
+______________________ SQL Views _____________________
+
+Create view  [View Name] As Select Column Names from TableName where Condition;
+
+Output: Select * from ViewName;
+
+Syntax to remove Views: Drop view ViewName;
 
 
 
