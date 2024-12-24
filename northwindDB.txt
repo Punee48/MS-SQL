@@ -1,0 +1,175 @@
+USE AdventureWorks2017;
+
+CREATE DATABASE TEXTDB;
+--CREATE TABLE
+
+/*
+Data Manipulation Language (DML)
+The operation includes such as INSERT, SELECT, UPDATE, DELETE
+
+*/
+CREATE TABLE helloWorld
+(
+	ID INT PRIMARY KEY IDENTITY (1, 1),
+	Description nvarchar(50)
+)
+
+--Inserting data into the table using insert command
+
+
+INSERT INTO helloWorld
+VALUES 
+('test1'),
+('test2'),
+('test3');
+
+-- SELECT statement is used to retrive the data from the table
+
+SELECT *
+FROM helloWorld;
+
+--Count command is used to get the count of the data in the table
+
+SELECT COUNT(*) AS [Total Record] -- Using AS keyword we can name the column temporarily
+FROM helloWorld;
+
+--Using Update Command we can update the record in the table
+
+UPDATE dbo.helloWorld 
+SET Description = 'BAU Information'
+WHERE ID = 2;
+
+--Using DELETE Command we can delete/remove the data from the table
+
+DELETE FROM dbo.helloWorld 
+WHERE ID = 3;
+
+--Using DROP Command we can remove the table from the database
+
+DROP TABLE dbo.helloWorld;
+
+USE AdventureWorks2017;
+
+SELECT DISTINCT TOP (10) * 
+FROM Person.Person
+ORDER BY FirstName DESC;
+
+--USING Restore Database Option we can import the sample
+--database with the file extension bak
+
+USE NORTHWND; --Using USE Command we can set the database has a default
+
+SELECT TOP (10) * 
+FROM Customers
+ORDER BY CompanyName;
+
+--Alternative Method
+
+SELECT TOP(10) * 
+FROM [NORTHWND].[dbo].[Customers]
+ORDEr BY CompanyName DESC;
+
+--LIKE OPERATOR EXAMPLES
+
+SELECT *
+FROM Customers
+WHERE CompanyName LIKE 'AL%';
+
+/*
+JOINS:
+
+It is used to Join the Multiple table and provide the Output
+in a single table by adding the Column from the tables using 
+the relationship of Primary and Foreign keys
+
+*/
+
+SELECT * FROM Region;
+SELECT * FROM Territories;
+
+SELECT 
+	r.RegionID,
+	t.TerritoryDescription, 
+	t.TerritoryID
+FROM dbo.Territories t
+JOIN dbo.Region r
+ON r.RegionID = t.RegionID
+WHERE r.RegionID = 2;
+
+--Alternative method and also we are using ALIAS for proper column Name
+
+SELECT 
+	r.RegionID AS [Customer Region ID],
+	t.*
+FROM dbo.Territories t
+JOIN dbo.Region r
+ON r.RegionID = t.RegionID
+WHERE r.RegionID = 2;
+
+/*
+UNION:
+It is used to combine the rows from the different tables sources
+
+While using UNION we need to ensure that Column Name should be 
+equal by adding data from the differet Sources
+
+*/
+
+--Examples
+
+SELECT 
+	FirstName + ' ' + LastName AS [Employee FullName],
+	Address,
+	City
+FROM Employees
+UNION
+SELECT 
+	ContactName, 
+	Address, 
+	City
+FROM Customers;
+
+/*
+VARIABLES:
+We can use variable for working in the table temporary
+*/
+
+--Using Variable we are creating a temp table and inserting the record
+
+DECLARE @RegionNew TABLE
+(
+	RegionID INT,
+	RegionDescription nvarchar(500)
+)
+
+--Inserting values
+
+INSERT INTO @RegionNew
+VALUES
+	(1, 'Kanyakumari'),
+	(2, 'Tenkasi'),
+	(3, 'Palakkad'),
+	(4, 'Thiruvanrum');
+
+
+--We can also insert the record from the different table
+
+INSERT INTO @RegionNew
+SELECT RegionID, RegionDescription
+FROM Region
+WHERE RegionID > 2;
+
+SELECT * FROM @RegionNew;
+
+--Following query will help us to find the TempDB useage
+
+SELECT 
+	SUM(user_object_reserved_page_count) * 8 AS user_obj_kb,
+	SUM(internal_object_reserved_page_count) * 8 AS internal_obj_kb,
+	SUM(version_store_reserved_page_count) * 8 AS version_obj_kb,
+	SUM(mixed_extent_page_count) * 8 AS mixedextent_kb
+FROM sys.dm_db_file_space_usage;
+
+USE NORTHWND;
+
+SELECT * FROM sys.columns;
